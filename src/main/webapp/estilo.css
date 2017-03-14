@@ -1,0 +1,397 @@
+html, body {
+    
+    background : #f0f0f0;
+    height:100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.icone{
+    width: 25px;
+    height: 25px;
+}
+.paginaForm {
+	
+	min-height:  100%;
+        height:auto !important;
+}
+#botaoLogou{
+    float: bottom ;
+    float: right; 
+}
+.pagina{
+   
+    height:auto !important;
+}
+.mostra{
+    float: right;
+}
+.escolhaForm{
+    alignment-adjust: auto;
+}
+.conteudoForm{
+ float : left;
+ min-height: 970px;
+ 
+ width: 100%;
+ overflow: visible;
+}
+
+#form-cadastro {
+	float: left;
+	width: 85%;
+	padding: 10px;
+	border-right: 1px solid #CCC;
+	margin-right: -21px;
+	margin-bottom: 0;
+}
+
+#form-envio input[type=file] { display: none; }
+#form-envio input[type=submit],
+input[type=button] {
+    margin-bottom: 0;
+    padding: 10px 25px;
+    color: #FFF;
+    background: #4679BD;
+    border: none;
+    cursor: pointer;
+    outline-color: transparent;
+    text-align: center;
+}
+
+#form-cadastro {
+	float: left;
+	width: 85%;
+	padding: 10px;
+	border-right: 1px solid #CCC;
+	margin-right: -21px;
+	margin-bottom: 0;
+}
+
+#form-cadastro input[type=text],
+#form-cadastro input[type=password],
+#form-cadastro textarea {
+    padding: 10px 5px;
+    outline-color: #4679BD;
+    border: none;
+    display: block;
+
+}
+#form-cadastro input[type=file] { display: none; }
+#form-cadastro input[type=submit],
+input[type=button] {
+    padding: 10px 20px;
+    color: #FFF;
+    background: #4679BD;
+    border: none;
+    cursor: pointer;
+    outline-color: transparent;
+}
+
+#form-cadastro input[type=submit] {
+	margin-top: 15px;
+}
+
+#form-cadastro input[type=submit]:hover,
+input[type=button]:hover {
+    background: #3060a0;
+}
+
+#form-cadastro label { font-size: 13px; }
+
+#form-cadastro .legenda {
+    display: block;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.cabecalho{
+    width: 100%;
+    height: 175px;
+    background: #6495ED;
+    background-image : url("http://www.ufmt.br/ufmt/site/media/estilo/images/logocuiaba.png"); 
+    /*background-size:100% 100%;**/
+    background-repeat:no-repeat;
+}
+.linha{
+    height: 29px;
+    background: #FF0000;
+}
+.corpo{
+    background: #808080;
+    border-right: 1px solid #CCC;
+    margin-left:205px;
+    margin-top: -58px;
+    box-shadow: 2px 2px 4px #000000;
+    border-radius: 5px;
+    width:70%;
+    min-height: 610px;
+    height:auto !important;
+}
+.submenu{
+    margin-left:20px;
+    float : right;
+    background: #ffffff;
+    width: 600px;
+    height: 150px;
+    box-shadow: 2px 2px 4px #000000;
+    border-radius: 5px;
+    
+}
+
+.principal{
+    margin-top:5px;
+    width: 55%;
+    border-right: 1px solid #CCC;
+    float: left;
+    height: 470px;
+}
+
+.botaoMenu{
+    margin-left: 15px;
+    margin-top: 15px;
+}
+.menu{
+    text-decoration: none;
+    margin-right: 15px;
+    float : right;
+    margin-top: 15px;
+    height: 100%;
+    color: #4679BD;
+    //display: block;
+    transition: 0.1s;
+}
+.nomelateral{
+    margin-top: 60px;
+    text-align: center;
+    padding-left: 20px;
+    font-family: Arial, Helvetica,sans-serif;
+    font-size: 18px;
+    color: #405A67;
+    
+}
+
+.menulateral{
+    
+    padding-left: 80px;
+    padding-top: 30px;
+    padding-bottom: 60px;
+    font-family: Arial, Helvetica,sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: #405A67;
+}
+
+.imagemcabecalho{
+    float : right;
+    margin-right: 117px;
+    margin-top: 25px
+   
+}
+
+.servico{
+    float: left;
+    margin-left: 5px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#galeria  {
+	
+        float: left;
+}
+#galeria img {
+        box-shadow: 2px 2px 4px #000000;
+        border-radius: 5px;
+	width: 145px;
+	height: 102px;
+	margin: 2px;
+	transition: 0.1s;
+}
+#galeria img:hover {
+	-webkit-transform:scale(1.6); /* prefixo para browsers webkit */
+	-moz-transform:scale(1.6); /* prefixo para browsers gecko */
+	-o-transform:scale(1.6); /* prefixo para opera */
+	transform:scale(1.6);
+	box-shadow: 0px 5px 5px rgba(0,0,0,0.7);
+}
+
+#galeria2  {
+        
+	width: 85%;
+        float: left;
+}
+#galeria2 img {
+        box-shadow: 2px 2px 4px #000000;
+        border-radius: 5px;
+	width: 250px;
+	height: 200px;
+	margin: 2px;
+	transition: 0.1s;
+}
+#galeria2 img:hover {
+	-webkit-transform:scale(1.6); /* prefixo para browsers webkit */
+	-moz-transform:scale(1.6); /* prefixo para browsers gecko */
+	-o-transform:scale(1.6); /* prefixo para opera */
+	transform:scale(1.6);
+	box-shadow: 0px 5px 5px rgba(0,0,0,0.7);
+}
+
+#imagem{
+    box-shadow: 2px 2px 4px #000000;
+    border-radius: 5px;
+}
+
+.conteudo{
+    margin-left:20px;
+    margin-top: 20px;
+    width: 600px;
+    min-height: 240px;
+    height:auto !important;
+    box-shadow: 2px 2px 4px #000000;
+    border-radius: 5px;
+    background: #ffffff;
+    float: left;
+    
+}
+
+.conteudoForm{
+    height: 791px;
+}
+
+.menuForm{ 
+	text-align: center;
+	float: right;
+	width: 15%;
+	padding-top: 20px;
+}
+.menuForm a {
+	padding: 5px;
+        margin-left: 20px;
+        text-decoration: none;
+        color: #4679BD;
+        display: block;
+	transition: 0.1s;
+}
+
+.menu a {
+	padding: 5px;
+        margin-left: 20px;
+        text-decoration: none;
+        color: #4679BD;
+        display: block;
+	transition: 0.1s;
+}
+
+.menuForm a:hover {
+	background: #383838;
+	color: #FFF;
+        
+}
+
+.menu a:hover {
+	background: #383838;
+	color: #FFF;
+        
+}
+
+.cor{
+   color :  #4679BD;
+}
+
+.rodape{
+  
+    
+    float: left;
+    border-radius: 5px;
+    width: 100%;
+    height: 50px;
+    background-image : url("http://i1115.photobucket.com/albums/k560/powerguidissimo/bg_02_zps36e4b151.jpg");
+    background-repeat: repeat-x;
+    color : #4169E1;
+}
+.titulo{
+    color: #405A67;
+    margin-bottom: 30px;
+}
+#data{
+    margin-right:  5px;
+    float:right;
+}
+
+
+.imagem_cadastro{
+    float: left;
+    padding: 10px;
+}
+
+.botao{
+    float: left;
+    width: 200px;
+}
+
+.botaoesq{
+    padding: -21px;
+    float : left;
+}
+.botaodir{
+    float : right;
+}
+.mostra{
+    width: 50%;
+    
+    
+}
+
+.reclamacao{
+    float: right;
+    text-align: center;
+    margin-top: -222px;
+    height: 220px;
+    width: 34%;
+}
+
+.mostraFuncao{
+    width:  84%;
+    float: left;
+    min-height: 240px;
+    border-right: 1px solid #CCC;
+    
+}
+
+#texto{
+    border-right: 1px solid #CCC;
+    margin-top: -30px;
+    background: #F0F0F0;
+    box-shadow: 2px 2px 4px #000000;
+    border-radius: 5px;
+    min-height: 610px;
+    float: left;
+    padding: 30px;
+    margin-left: 145px;
+    width: 940px;
+    
+}
+
+.ajuste{
+    height: 100%;
+}
+
+.esquerda{
+    float: left;
+    width: 40%;
+    height: 200px;
+    margin-bottom: 23px;
+     
+}
+
+.direita{
+    float: right;
+    width: 55%;
+    height: 200px;
+    background: #F0F0F0;
+    box-shadow: 2px 2px 4px #000000;
+    border-radius: 5px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}

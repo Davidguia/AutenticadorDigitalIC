@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <link rel="stylesheet" type="text/css" href="../estilo.css"/>
+                <meta charset="utf-8"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+            <script type="text/javascript">
+                function start() {
+                    PF('statusDialog').show();
+                }
+
+                function stop() {
+                    PF('statusDialog').hide();
+                }
+            </script>
+        </h:head>
+        <h:body onload="slide1()">
+            <h:panelGroup class="pagina" layout="block">
+                <h:panelGroup class="cabecalho" layout="block">
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup class="corpo" layout="block"  >
+                <h:form id="loginForm" >
+                    <p:commandButton action="#{loginBean.doLogout()}" value="LogOut" update="loginForm" ajax="true"></p:commandButton>
+                </h:form>
+
+                <p:dataTable var="dados" value="#{outrosBean.listarUsuario}"  style="text-align:center">
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{dados.nome}" />
+                    </p:column>
+                    <p:column headerText="Email">
+                        <h:outputText value="#{dados.email}" />
+                    </p:column>
+                    <p:column headerText="Telefone">
+                        <h:outputText value="#{dados.telefone}" />
+                    </p:column>
+                </p:dataTable>
+                <h:panelGroup class="principal" layout="block">
+                    <h:panelGroup class="titulo" ></h:panelGroup>
+                    <h:panelGroup  >
+                        <h:form id="fileUpoad" prependId="false"     enctype="multipart/form-data">
+                            <h:outputLabel for="fileIdPhoto" value="Escolha seu Arquivo:" />
+                            <p:fileUpload id="fileIdPhoto"  fileUploadListener="#{fileUploadBean.uploadPhoto}" mode="advanced" dragDropSupport="false"
+                                          multiple="true" update="messages" sizeLimit="10000000" fileLimit="3" allowTypes="/(\.|\/)(pdf)$/"  />
+                            <p:messages id="messages" autoUpdate="true" closable="true" /> </h:form>      
+                    </h:panelGroup>
+                    <h:form id="listarDocumentos">
+                        <p:dataTable var="documentos" value="#{documentosBean.listarDocumentos}" paginator="true" rows="6" lazy="true" >
+                            <f:facet name="header">Lista de documentos</f:facet>  
+                            <p:column>
+                                <f:facet name="header">Nome</f:facet>
+                                <h:outputText value="#{documentos.nome}"></h:outputText>
+                            </p:column>
+                            <p:column  style="text-align:center">    
+                                <f:facet name="header">Baixar</f:facet>
+                                    <p:commandButton value="Download" ajax="false"  icon="ui-icon-arrowthick-1-s">
+                                        <p:fileDownload contentDisposition="inline" value="#{fileDownloadView.baixar(documentos.nome)}" />
+                                    </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:body>
+    </f:view>
+</html>
+

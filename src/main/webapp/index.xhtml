@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <link rel="stylesheet" type="text/css" href="estilo.css"/>
+                <meta charset="utf-8"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+        <h:body onload="slide1()">
+            <h:panelGroup class="pagina" layout="block">
+                <h:panelGroup class="cabecalho" layout="block">
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup class="corpo" layout="block" >
+                <h:panelGroup class="menu" >
+                    <h:form id="loginForm">
+                        <p:growl id="msg" showDetail="true" life="3000" />
+                        <p:panel header="Login" style="width: 360px;">
+                            <h:panelGrid id="loginPanel" columns="2">      
+                                    <h:outputText value="Usuário" />
+                                    <p:inputText id="username" value="#{loginBean.login.uname}" ></p:inputText>
+                                    <p:spacer></p:spacer>
+                                    <p:message for="username" ></p:message>
+                                    <h:outputText value="Senha" />
+                                    <p:password id="password" value="#{loginBean.login.password}"  feedback="false"></p:password>
+                                    <p:spacer></p:spacer>
+                                    <p:message for="password"></p:message>
+                                    <p:spacer></p:spacer>
+                                    <p:commandButton action="#{loginBean.doLogin}" value="Login" update="loginForm" ajax="true"></p:commandButton>
+                     
+                              
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:form>
+                </h:panelGroup>
+                <h:panelGroup class="principal" layout="block">
+
+                    <h:panelGroup class="titulo" ></h:panelGroup>
+                    <h:panelGroup  >
+                        <h:panelGroup class="botaoMenu" >
+                            <h:form>
+                                <p:growl id="messages" showDetail="true"/>
+                                <p:menuButton value="Menu Principal">
+                                    <p:menuitem value="Outros" outcome="outros" icon="ui-icon-extlink"/>
+                                    <p:menuitem value="Professor" outcome="professor" icon="ui-icon-extlink"/>
+                                    <p:menuitem value="Aluno" outcome="aluno" icon="ui-icon-extlink"/>
+                                </p:menuButton>
+                            </h:form>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+            </h:panelGroup>
+
+        </h:body>
+
+    </f:view>
+</html>
+

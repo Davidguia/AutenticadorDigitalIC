@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <link rel="stylesheet" type="text/css" href="estilo.css"/>
+                <meta charset="utf-8"/>
+                <script type="text/javascript" language="javascript" src="jquery-1.11.1.min.js"></script>
+                <script type="text/javascript" language="javascript" src="jquery.cycle.all.js"></script>
+                <script type="text/javascript" language="javascript" src="script.js"></script>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body onload="slide1()">
+            <h:panelGroup class="pagina" layout="block">
+                <h:panelGroup class="cabecalho" layout="block">
+
+                </h:panelGroup>
+                
+                <h:panelGroup class="corpo" layout="block">
+                    <h:panelGroup class="principal" layout="block">
+                        <h:panelGroup class="titulo" ></h:panelGroup>
+
+                       
+                        <h:panelGroup  class="conteudo" layout="block">
+                            <h:form id="Professor">
+                                <p:panel id="panel" header="Cadastro de Professores" style="margin-bottom:10px;">
+                                    <p:messages id="messages" />
+                                    <h:panelGrid columns="3" cellpadding="5">
+                                        <p:outputLabel for="nome" value="Nome :" />
+                                        <p:inputText id="nome" value="#{professorBean.professor.nome }" required="true" label="Nome"/>
+                                        <p:message for="nome" />
+                                         
+                                        <p:outputLabel for="telefone" value="Telefone :" />
+                                        <p:inputMask id="telefone" value="#{professorBean.professor.telefone}" mask="(99) 99999-9999"/>
+                                        <p:message for="telefone" />
+                                        
+                                        <p:outputLabel for="cpf" value="Cpf :" />
+                                        <p:inputMask id="cpf" value="#{professorBean.professor.cpf}" mask="999.999.999-99"/>
+                                        <p:message for="cpf" />
+                                        
+                                         <p:outputLabel for="siape" value="Siape :" />
+                                         <p:inputText id="siape" value="#{professorBean.professor.siape}" required="true" label="Siape"/>
+                                        <p:message for="siape" />
+
+                                        <p:outputLabel for="email" value="Email :" />
+                                        <p:inputText id="email" required="true" label="email" 
+                                                     requiredMessage="Please enter your email address."
+                                                     validatorMessage="Formato invalido de email"
+                                                     value="#{professorBean.professor.email}">
+                                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                        </p:inputText>
+                                        <p:message for="email" />       
+                                        <p:outputLabel for="senha" value="Senha:" />
+                                        <p:inputText id="senha" value="#{professorBean.professor.senha}" type="password" required="true" label="Senha"/>
+                                        <p:message for="senha" />
+                                        
+                                       
+                                        
+                                    </h:panelGrid>
+                               
+                                <p:toolbar>
+                                    <f:facet name="left">
+                                        <p:commandButton value="Enviar" update="panel" actionListener="#{professorBean.salvaProfessor()}" style="margin-right:20px;" action="index?faces-redirect=true"/>
+                                        
+                                    </f:facet>
+                                </p:toolbar>  
+                                </p:panel> 
+                            </h:form>
+                            
+
+
+                        </h:panelGroup> 
+                    </h:panelGroup> 
+
+                    <h:panelGroup class="menu" layout="block">
+
+                        
+
+
+
+                    </h:panelGroup>
+                </h:panelGroup>    
+
+
+
+            </h:panelGroup>
+           
+
+        </h:body>
+
+    </f:view>
+</html>
+
