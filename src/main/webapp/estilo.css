@@ -158,7 +158,6 @@ input[type=button]:hover {
     margin-top: 15px;
     height: 100%;
     color: #4679BD;
-    //display: block;
     transition: 0.1s;
 }
 .nomelateral{

@@ -18,7 +18,7 @@ public class ConnBD {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco?useTimezone=true&serverTimezone=UTC","root","root");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/brum?useTimezone=true&serverTimezone=UTC","helder","ufmt2017");
             
             return con;
             
