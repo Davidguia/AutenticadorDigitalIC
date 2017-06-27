@@ -23,7 +23,7 @@ public class ConnBD {
             return con;
             
         } catch (ClassNotFoundException ex) {
-            System.out.println("Classe n?o encontrada: "+ex.getMessage());
+            System.out.println("Classe não encontrada: "+ex.getMessage());
         } catch (SQLException ex) {
             System.out.println("Erro: "+ex.getMessage());
         }
