@@ -7,6 +7,9 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import java.io.File;
 import com.itextpdf.text.Image;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -22,8 +25,11 @@ public class PDFModify {
 
     public void modificaPDF(String url, String nome) {
         try {
-
-            String qrCodeText = url;
+            // formatando local/data
+            GregorianCalendar calendar = new GregorianCalendar();
+            SimpleDateFormat formatador = new SimpleDateFormat("dd' de 'MMMMM' de 'yyyy' às 'HH'h'mm'min'", Locale.getDefault());
+            
+            String qrCodeText = "Este documento foi assinado digitalmente em " + formatador.format(calendar.getTime());
             String filePath = "C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\qrcode\\" +nome+".png";
             int size = 125;
             String fileType = "png";
