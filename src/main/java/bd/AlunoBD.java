@@ -40,18 +40,13 @@ public class AlunoBD {
             pstm.setString(7, UseBCrypt.hashPassword(objAluno.getSenha()));
             pstm.executeUpdate();
             con.commit();
-            con.close();
             
             // Extraindo o idpessoa
             int idpessoa;
-            con = ConnBD.getConnection();
-            con.setAutoCommit(false);
-            pstm = con.prepareStatement("SELECT * FROM pessoa");
+            pstm = con.prepareStatement("SELECT * FROM pessoa ORDER BY id");
             ResultSet rs = pstm.executeQuery();
             rs.last();
             idpessoa = rs.getInt("id");
-            pstm.close();
-            con.close();
             
             // Insere as credenciais do usuário na tabela credenciais
             CredencialBD repositorio = new CredencialBD();
@@ -59,9 +54,16 @@ public class AlunoBD {
             gauth.setCredentialRepository(repositorio);
             GoogleAuthenticatorKey key = gauth.createCredentials(objAluno.getNome());
 
-            con = ConnBD.getConnection();
-            pstm = con.prepareStatement("UPDATE credenciais SET idpessoa = ? WHERE idpessoa = ''");
+            // Extraindo o idcredencial
+            int idcredencial;
+            pstm = con.prepareStatement("SELECT * FROM credenciais ORDER BY idcredencial");
+            rs = pstm.executeQuery();
+            rs.last();
+            idcredencial = rs.getInt("idcredencial");
+            
+            pstm = con.prepareStatement("UPDATE credenciais SET idpessoa = ? WHERE idcredencial = ?");
             pstm.setInt(1, idpessoa);
+            pstm.setInt(2, idcredencial+1);
             pstm.executeUpdate();
 
             con.commit();
