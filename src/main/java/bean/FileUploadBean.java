@@ -5,7 +5,7 @@
  */
 package bean;
 
-
+import bd.CredencialBD;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,6 +21,9 @@ import java.sql.SQLException;
 import javax.faces.bean.ManagedProperty;
 import model.Documentos;
 import bd.DocumentosBD;
+import com.warrenstrange.googleauth.GoogleAuthenticator;
+import com.warrenstrange.googleauth.GoogleAuthenticatorConfig;
+import java.util.Scanner;
 import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "fileUploadBean")
@@ -30,7 +33,10 @@ public class FileUploadBean implements Serializable {
 
     @ManagedProperty(value = "#{loginBean}")
     private LoginBean loginBean;
-
+    
+    CredencialBD repositorio = new CredencialBD();
+    GoogleAuthenticator gauth = new GoogleAuthenticator();
+       
     PDFModify pdfModify = new PDFModify();
     private String name;
     private String url;
@@ -105,54 +111,61 @@ public class FileUploadBean implements Serializable {
     }
 
     public String uploadResume() throws IOException, SQLException {
+            UploadedFile uploadedPhoto = getResume();
+            //System.out.println("Name " + getName());
+            //System.out.println("tmp directory" System.getProperty("java.io.tmpdir"));
+            //System.out.println("File Name " + uploadedPhoto.getFileName());
+            //System.out.println("Size " + uploadedPhoto.getSize());
+            this.filePath = "C:/Users/" + System.getProperty("user.name") + "/Documents/fotos/";
 
-        UploadedFile uploadedPhoto = getResume();
-        //System.out.println("Name " + getName());
-        //System.out.println("tmp directory" System.getProperty("java.io.tmpdir"));
-        //System.out.println("File Name " + uploadedPhoto.getFileName());
-        //System.out.println("Size " + uploadedPhoto.getSize());
-        this.filePath = "C:/Users/"+System.getProperty("user.name")+"/Documents/fotos/";
+            objOutros.setUrl(this.filePath);
+            byte[] bytes = null;
 
-        objOutros.setUrl(this.filePath);
-        byte[] bytes = null;
+            if (null != uploadedPhoto) {
+                bytes = uploadedPhoto.getContents();
+                String filename = FilenameUtils.getName(uploadedPhoto.getFileName());
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(this.filePath + filename)));
+                stream.write(bytes);
+                stream.close();
 
-        if (null != uploadedPhoto) {
-            bytes = uploadedPhoto.getContents();
-            String filename = FilenameUtils.getName(uploadedPhoto.getFileName());
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(this.filePath + filename)));
-            stream.write(bytes);
-            stream.close();
+            }
 
-        }
-
-        return "success";
+            return "success";
     }
 
     /*  The above code is for file upload using simple mode. */
     //This below code is for file upload with advanced mode.
     public void uploadPhoto(FileUploadEvent e) throws IOException, SQLException {
 
-        UploadedFile uploadedPhoto = e.getFile();
+        gauth.setCredentialRepository(repositorio);
+        System.out.println("Senha TOTP:");
+        System.out.println(gauth.getTotpPassword(repositorio.getSecretKey("admin")));
+        
+        if (gauth.authorizeUser("admin", 360804)){
 
-        this.filePath = "C:/Users/"+System.getProperty("user.name")+"/Documents/fotos/";
-        byte[] bytes = null;
+            UploadedFile uploadedPhoto = e.getFile();
 
-        //System.out.println("ID do usuário - " + loginBean.getId());
+            this.filePath = "C:/Users/" + System.getProperty("user.name") + "/Documents/fotos/";
+            byte[] bytes = null;
 
-        if (null != uploadedPhoto) {
-            bytes = uploadedPhoto.getContents();
-            String filename = FilenameUtils.getName(uploadedPhoto.getFileName());
-            this.setName(filename);
-            this.setUrl(filePath);
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(this.filePath + filename)));
-            stream.write(bytes);
-            stream.close();
-            documentosBD.inserirDocumentos(getName(), getUrl(), loginBean.login.getId());
-            pdfModify.modificaPDF( this.url, this.getName());
+            //System.out.println("ID do usuário - " + loginBean.getId());
+            if (null != uploadedPhoto) {
+                bytes = uploadedPhoto.getContents();
+                String filename = FilenameUtils.getName(uploadedPhoto.getFileName());
+                this.setName(filename);
+                this.setUrl(filePath);
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(this.filePath + filename)));
+                stream.write(bytes);
+                stream.close();
+                documentosBD.inserirDocumentos(getName(), getUrl(), loginBean.login.getId());
+                pdfModify.modificaPDF(this.url, this.getName());
 
+            }
+
+            FacesContext.getCurrentInstance().addMessage("messages", new FacesMessage(FacesMessage.SEVERITY_INFO, uploadedPhoto.getFileName(), ""));
+        } else {
+            FacesContext.getCurrentInstance().addMessage("messages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "deu erro na autorização fdp", ""));
         }
-
-        FacesContext.getCurrentInstance().addMessage("messages", new FacesMessage(FacesMessage.SEVERITY_INFO, uploadedPhoto.getFileName(), ""));
     }
 
     public void setLoginBean(LoginBean loginBean) {
