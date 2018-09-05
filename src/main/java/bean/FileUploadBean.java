@@ -116,7 +116,7 @@ public class FileUploadBean implements Serializable {
             //System.out.println("tmp directory" System.getProperty("java.io.tmpdir"));
             //System.out.println("File Name " + uploadedPhoto.getFileName());
             //System.out.println("Size " + uploadedPhoto.getSize());
-            this.filePath = "C:/Users/" + System.getProperty("user.name") + "/Documents/fotos/";
+            this.filePath = "D://Documents//fotos//";
 
             objOutros.setUrl(this.filePath);
             byte[] bytes = null;
@@ -137,15 +137,24 @@ public class FileUploadBean implements Serializable {
     //This below code is for file upload with advanced mode.
     public void uploadPhoto(FileUploadEvent e) throws IOException, SQLException {
 
+        CredencialBD repositorio = new CredencialBD();
+        GoogleAuthenticator gauth = new GoogleAuthenticator();
         gauth.setCredentialRepository(repositorio);
-        System.out.println("Senha TOTP:");
-        System.out.println(gauth.getTotpPassword(repositorio.getSecretKey("admin")));
+        String user = "David";
         
-        if (gauth.authorizeUser("admin", 360804)){
+        System.out.println("Username: " + user);
+//        System.out.println("Chave: " + repositorio.getSecretKey(loginBean.login.getUname()));
+        System.out.println("Chave: " + repositorio.getSecretKey(user));
+        System.out.println("TOTP: " + gauth.getTotpPassword(repositorio.getSecretKey(user)));
+        boolean authorize = gauth.authorizeUser(user,
+                gauth.getTotpPassword(repositorio.getSecretKey(user)));
+        if (authorize) {
 
             UploadedFile uploadedPhoto = e.getFile();
 
-            this.filePath = "C:/Users/" + System.getProperty("user.name") + "/Documents/fotos/";
+//            this.filePath = "D:/Users/" + System.getProperty("user.name") + "/Documents/fotos/";
+            this.filePath = "D:/Documents/fotos/";
+
             byte[] bytes = null;
 
             //System.out.println("ID do usuário - " + loginBean.getId());

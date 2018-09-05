@@ -26,23 +26,24 @@ public class PDFModify {
     public void modificaPDF(String url, String nome) {
         try {
             // formatando local/data
-            GregorianCalendar calendar = new GregorianCalendar();
-            SimpleDateFormat formatador = new SimpleDateFormat("dd' de 'MMMMM' de 'yyyy' às 'HH'h'mm'min'", Locale.getDefault());
-            
-            String qrCodeText = "Este documento foi assinado digitalmente em " + formatador.format(calendar.getTime());
-            String filePath = "C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\qrcode\\" +nome+".png";
+            String qrCodeText = "Este documento foi assinado digitalmente.";
+//            String filePath = "D:\\Users\\"+System.getProperty("user.name")+"\\Documents\\qrcode\\" +nome+".png";
+            String filePath = "D:\\Documents\\qrcode\\" +nome+".png";
             int size = 125;
             String fileType = "png";
             File qrFile = new File(filePath);
             generatedQRCode.createQRImage(qrFile, qrCodeText, size, fileType);
             System.out.println("DONE");
             //Create PdfReader instance.
-            PdfReader pdfReader = new PdfReader("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\fotos\\" +nome);
+//            PdfReader pdfReader = new PdfReader("D:\\Users\\"+System.getProperty("user.name")+"\\Documents\\fotos\\" +nome);
+            PdfReader pdfReader = new PdfReader("D:\\Documentos\\fotos\\" +nome);
 
             //Create PdfStamper instance.
-            PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\pdf\\" +nome));
+//            PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream("D:\\Users\\"+System.getProperty("user.name")+"\\Documents\\pdf\\" +nome));
+            PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream("D:\\Documents\\pdf\\" +nome));
             PdfContentByte content = pdfStamper.getOverContent(1);
-            Image image = Image.getInstance("C:\\Users\\"+System.getProperty("user.name")+"\\Documents\\qrcode\\" +nome+".png");
+//            Image image = Image.getInstance("D:\\Users\\"+System.getProperty("user.name")+"\\Documents\\qrcode\\" +nome+".png");
+            Image image = Image.getInstance("D:\\Documents\\qrcode\\" +nome+".png");
 
             //Get the number of pages in pdf.
             
@@ -55,8 +56,6 @@ public class PDFModify {
                 image.setBorderWidth(0.0f);
                 image.setAnnotation(new Annotation(0, 0, 0, 0, 3));
                 content.addImage(image);
-                
-          
 
             //Close the pdfStamper.
             pdfStamper.close();

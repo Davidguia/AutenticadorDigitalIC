@@ -34,7 +34,7 @@ public class CredencialBD implements ICredentialRepository {
             ps.setString(1, userName);
             ResultSet rs = ps.executeQuery();
             rs.first();
-            result = rs.getString("username");
+            result = rs.getString("secretKey");
             ps.close();
             ConnBD.getConnection().close();
         } catch (SQLException ex) {

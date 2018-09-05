@@ -15,6 +15,7 @@ import java.sql.Connection;
 import bean.UseBCrypt;
 import com.warrenstrange.googleauth.GoogleAuthenticator;
 import com.warrenstrange.googleauth.GoogleAuthenticatorKey;
+import com.warrenstrange.googleauth.GoogleAuthenticatorQRGenerator;
 
 /**
  *
@@ -52,7 +53,10 @@ public class AlunoBD {
             CredencialBD repositorio = new CredencialBD();
             GoogleAuthenticator gauth = new GoogleAuthenticator();
             gauth.setCredentialRepository(repositorio);
+            System.out.println(objAluno.getNome());
             GoogleAuthenticatorKey key = gauth.createCredentials(objAluno.getNome());
+            System.out.println(key);
+            String qrcode = GoogleAuthenticatorQRGenerator.getOtpAuthURL("Autenticador Digital IC", objAluno.getNome(), key);
 
             // Extraindo o idcredencial
             int idcredencial;
@@ -61,9 +65,10 @@ public class AlunoBD {
             rs.last();
             idcredencial = rs.getInt("idcredencial");
             
-            pstm = con.prepareStatement("UPDATE credenciais SET idpessoa = ? WHERE idcredencial = ?");
+            pstm = con.prepareStatement("UPDATE credenciais SET idpessoa = ?, qrcode = ? WHERE idcredencial = ?");
             pstm.setInt(1, idpessoa);
-            pstm.setInt(2, idcredencial+1);
+            pstm.setString(2, qrcode);
+            pstm.setInt(3, idcredencial);
             pstm.executeUpdate();
 
             con.commit();
